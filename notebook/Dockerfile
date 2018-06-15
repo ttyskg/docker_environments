@@ -11,9 +11,8 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
     rm -rf /var/lib/apt/lists/*
 
 # Setting dotfiles
-RUN git clone --recursive https://github.com/ttyskg/dotfiles && \
-    ~/dotfiles/setup.sh && \
-    source .bashrc
+RUN git clone --recursive https://github.com/ttyskg/dotfiles /home/$NB_USER/dotfiles && \
+    /home/$NB_USER/dotfiles/setup.sh
 
 # Switch back to jovyan to avoid accidental container runs as root
 USER $NB_UID
