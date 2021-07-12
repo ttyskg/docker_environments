@@ -1,0 +1,9 @@
+{
+    "name": "bacterial_ppi",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "bacterial_ppi",
+    "workspaceFolder": "/tmp/work",
+    "extensions": [
+        "ms-python.vscode-pylance"
+    ]
+}
