@@ -1,0 +1,11 @@
+version: '3.2'
+
+services:
+    SERVICE_NAME:
+        image: IMAGE_NAME:1.0
+        build: .
+        container_name: 'CONTAINER_NAME'
+        stdin_open: true
+        working_dir: '/tmp/work'
+        volumes:
+            - ..:/tmp/work

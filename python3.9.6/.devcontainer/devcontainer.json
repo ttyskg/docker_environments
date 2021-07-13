@@ -1,0 +1,9 @@
+{
+    "name": "NAME",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "SERVICE_NAME",
+    "workspaceFolder": "/tmp/work",
+    "extensions": [
+        "ms-python.vscode-pylance"
+    ]
+}
