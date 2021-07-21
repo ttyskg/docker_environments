@@ -1,0 +1,11 @@
+version: '3.2'
+
+services:
+    ncbi_blast:
+        image: ncbi_blast:1.0
+        build: .
+        container_name: 'ncbi_blast'
+        stdin_open: true
+        working_dir: '/tmp/work'
+        volumes:
+            - ..:/tmp/work

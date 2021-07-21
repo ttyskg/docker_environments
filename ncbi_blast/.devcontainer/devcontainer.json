@@ -1,0 +1,9 @@
+{
+    "name": "ncbi_blast",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "ncbi_blast",
+    "workspaceFolder": "/tmp/work",
+    "extensions": [
+        "ms-python.vscode-pylance"
+    ]
+}
