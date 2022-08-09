@@ -3,6 +3,15 @@
     "service": "dev",
     "workspaceFolder": "/tmp/work",
     "extensions": [
-        "ms-python.vscode-pylance"
+        "DavidAnson.vscode-markdownlint",
+        "njpwerner.autodocstring",
+        "mechatroner.rainbow-csv",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-toolsai.jupyter",
+        "ms-toolsai.jupyter-renderers",
+        "shardulm94.trailing-spaces",
+        "streetsidesoftware.code-spell-checker",
+        "usernamehw.errorlens"
     ]
 }

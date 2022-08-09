@@ -1,7 +1,7 @@
-matplotlib==3.4.2
-numpy==1.22.0
-pandas==1.2.4
-plotly==4.14.3
-pluggy==0.13.1
-pytest==6.2.3
-scipy==1.6.3
+matplotlib
+numpy
+pandas
+plotly
+pluggy
+pytest
+scipy
