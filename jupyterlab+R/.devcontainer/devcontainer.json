@@ -1,9 +1,28 @@
 {
-    "name": "bacterial_ppi",
     "dockerComposeFile": "docker-compose.yml",
-    "service": "bacterial_ppi",
+    "service": "dev",
     "workspaceFolder": "/tmp/work",
-    "extensions": [
-        "ms-python.vscode-pylance"
-    ]
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "DavidAnson.vscode-markdownlint",
+                "eamodio.gitlens",
+                "github.vscode-pull-request-github",
+                "ionutvmi.path-autocomplete",
+                "jrebocho.vscode-random",
+                "njpwerner.autodocstring",
+                "mechatroner.rainbow-csv",
+                "ms-python.isort",
+                "ms-python.pylint",
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-toolsai.jupyter",
+                "ms-toolsai.jupyter-renderers",
+                "reditorsupport.r",
+                "shardulm94.trailing-spaces",
+                "streetsidesoftware.code-spell-checker",
+                "usernamehw.errorlens"
+            ]
+        }
+    }
 }

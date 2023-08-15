@@ -1,13 +1,9 @@
-version: '3.2'
-
 services:
-    bacterial_ppi:
-        image: bacterial_ppi:1.0
-        build: .
-        container_name: 'bacterial_ppi'
-        stdin_open: true
-        working_dir: '/tmp/work'
-        volumes:
-            - ..:/tmp/work
-        ports:
-            - "8888:8888"
+  dev:
+    build: .
+    stdin_open: true
+    working_dir: '/tmp/work'
+    volumes:
+      - ..:/tmp/work
+    ports:
+      - "8888:8888"

@@ -1,20 +1,35 @@
-FROM python:3.9.5
+FROM python:3.11.4
+
+# create non-root user
+RUN groupadd -r docker \
+    && useradd -r -g docker -s /bin/bash -m docker
 
 # Add R repository
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-key '0xE19F5F87128899B192B1A2C2AD5F960A256A04AF'\
-    && echo "deb http://cloud.r-project.org/bin/linux/debian buster-cran40/" > /etc/apt/sources.list.d/r.list
+RUN gpg --keyserver keyserver.ubuntu.com \
+    --recv-key '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7' \
+    && gpg --armor --export '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7' | \
+    tee /etc/apt/trusted.gpg.d/cran_debian_key.asc
 
 RUN apt-get update\
-    && apt-get install -y\
+    && apt-get install -y --no-install-recommends \
     git \
+    make \
     r-base \
+    r-base-dev \
     && rm -rf /var/lib/apt/lists/*
 
+# Setup working directory
 WORKDIR /tmp/work
 
 COPY requirements.txt ${PWD}
 COPY requirements.r ${PWD}
 
 RUN python -m pip install --upgrade pip \
-    && pip install -r requirements.txt \
-    && R -e "source('./requirements.r')"
+    && pip install -r requirements.txt
+    # && R -e "source('./requirements.r')"
+
+# add Python path of my library
+ENV PYTHONPATH "${PYTHONPATH}:/tmp/work/mylib"
+
+# set non root user
+USER docker

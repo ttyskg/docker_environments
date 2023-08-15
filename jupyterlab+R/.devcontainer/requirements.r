@@ -4,4 +4,4 @@ install.packages("IRkernel")
 IRkernel::installspec(user = FALSE)
 
 # Packages for analysis
-install.packages("growthcurver")
+# install.packages("growthcurver")
