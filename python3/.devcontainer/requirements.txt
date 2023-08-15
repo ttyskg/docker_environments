@@ -1,7 +1,10 @@
+black
+flake8
+isort
 matplotlib
+mypy
 numpy
 pandas
-plotly
-pluggy
+pylint
 pytest
-scipy
+tqdm
