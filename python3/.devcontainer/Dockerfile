@@ -19,8 +19,11 @@ COPY requirements.txt ${PWD}
 RUN pip install --no-cache-dir --upgrade pip \
     && pip install --no-cache-dir -r requirements.txt
 
-# add Python path of my library
+# Add Python path of my library
 ENV PYTHONPATH "${PYTHONPATH}:/tmp/work/mylib"
+
+# Setup matplotlibrc
+ENV MPLCONFIGDIR=/tmp/work/.devcontainer
 
 # set non root user
 USER docker
