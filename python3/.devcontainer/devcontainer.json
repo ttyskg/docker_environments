@@ -1,6 +1,9 @@
 {
-    "dockerComposeFile": "docker-compose.yml",
-    "service": "dev",
+    "name": "project_name",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "workspaceMount": "source=${localWorkspaceFolder},target=/tmp/work,type=bind",
     "workspaceFolder": "/tmp/work",
     "customizations": {
         "vscode": {

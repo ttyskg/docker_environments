@@ -1,7 +1,0 @@
-services:
-  dev:
-    build: .
-    stdin_open: true
-    working_dir: '/tmp/work'
-    volumes:
-      - ..:/tmp/work
