@@ -1,0 +1,16 @@
+# Note: rename this file `~/.msmtprc` to use email from your commandline
+# Note: Also, run `chmod 600 ~/.msmtprc`
+
+defaults
+auth           on
+tls            on
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+logfile        ~/.msmtp.log
+
+account        gmail
+host           smtp.gmail.com
+port           587
+from           USERNAME@gmail.com
+user           USERNAME
+password       GOOGLE_APP_PASS
+account default : gmail

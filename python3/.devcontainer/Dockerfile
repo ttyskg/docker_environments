@@ -1,15 +1,17 @@
-FROM python:3.11.4
+FROM python:3.12.4
 
 # create non-root user
 RUN groupadd -r docker \
     && useradd -r -g docker -s /bin/bash -m docker
 
-# Install requried packages
+# Install required packages
 RUN apt-get update\
     && apt-get install -y --no-install-recommends \
-	git \
+    git \
     make \
-	&& rm -rf /var/lib/apt/lists/*
+    msmtp \
+    msmtp-mta \
+    && rm -rf /var/lib/apt/lists/*
 
 # Setup working directory
 WORKDIR /tmp/work
