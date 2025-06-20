@@ -1,4 +1,4 @@
-FROM python:3.12.4
+FROM python:3.13.5
 
 # create non-root user
 RUN groupadd -r docker \
@@ -22,7 +22,13 @@ RUN pip install --no-cache-dir --upgrade pip \
     && pip install --no-cache-dir -r requirements.txt
 
 # Add Python path of my library
-ENV PYTHONPATH "${PYTHONPATH}:/tmp/work/mylib"
+ENV PYTHONPATH="/tmp/work/mylib"
+
+# Add my library to PATH
+## Git untracked: for container specific or credential script
+ENV PATH="${PATH}:/tmp/work/lib"
+## Git tracked: for my common library
+ENV PATH="${PATH}:/tmp/work/mylib"
 
 # Setup matplotlibrc
 ENV MPLCONFIGDIR=/tmp/work/.devcontainer
