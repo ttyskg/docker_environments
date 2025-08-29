@@ -1,0 +1,19 @@
+# Docker Compose for AutoDock Vina Jupyter Environment
+
+services:
+  autodock-vina:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./data:/workspace/data
+      - ./results:/workspace/results
+      - ./notebooks:/workspace/notebooks
+      - .:/workspace/host
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+      - MMTBX_CCP4_MONOMER_LIB=/workspace/geostd
+    container_name: autodock-vina-jupyter
+    restart: unless-stopped
