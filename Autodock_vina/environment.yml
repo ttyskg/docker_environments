@@ -1,0 +1,22 @@
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - numpy
+  - scipy
+  - rdkit
+  - gemmi
+  - meeko==0.6.1
+  - vina
+  - autogrid
+  - cctbx-base=2024.8
+  - jupyter
+  - jupyterlab
+  - ipywidgets
+  - matplotlib
+  - pandas
+  - biopython
+  - pip
+  - pip:
+    - py3Dmol
+    - molscrub
