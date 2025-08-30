@@ -1,7 +1,7 @@
 channels:
   - conda-forge
 dependencies:
-  - python=3.10
+  - python=3.11
   - numpy
   - scipy
   - rdkit
@@ -9,7 +9,7 @@ dependencies:
   - meeko==0.6.1
   - vina
   - autogrid
-  - cctbx-base=2024.8
+  - cctbx-base=2025.6
   - jupyter
   - jupyterlab
   - ipywidgets

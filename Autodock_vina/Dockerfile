@@ -1,7 +1,7 @@
 # Dockerfile for AutoDock Vina Flexible Docking Jupyter Notebook
 # Based on Python 3.10 for better cctbx-base compatibility
 
-FROM python:3.10-slim
+FROM python:3.11-slim
 
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive
