@@ -54,6 +54,13 @@ RUN cd /tmp && \
 RUN cd /workspace && \
     git clone https://github.com/phenix-project/geostd.git
 
+# Download hydrated docking scripts from AutoDock-Vina repository
+RUN cd /tmp && \
+    wget https://raw.githubusercontent.com/ccsb-scripps/AutoDock-Vina/develop/example/autodock_scripts/mapwater.py && \
+    wget https://raw.githubusercontent.com/ccsb-scripps/AutoDock-Vina/develop/example/autodock_scripts/dry.py && \
+    chmod +x mapwater.py dry.py && \
+    mv mapwater.py dry.py /opt/conda/envs/vina/bin/
+
 # Copy and setup startup script
 COPY start-jupyter.sh /usr/local/bin/start-jupyter.sh
 RUN chmod +x /usr/local/bin/start-jupyter.sh
