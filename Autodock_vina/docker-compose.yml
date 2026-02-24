@@ -12,8 +12,10 @@ services:
       - ./results:/workspace/results
       - ./notebooks:/workspace/notebooks
       - .:/workspace/host
+      - ./src:/workspace/src
     environment:
       - JUPYTER_ENABLE_LAB=yes
       - MMTBX_CCP4_MONOMER_LIB=/workspace/geostd
     container_name: autodock-vina-jupyter
     restart: unless-stopped
+    user: "docker"

@@ -1,5 +1,5 @@
 # Dockerfile for AutoDock Vina Flexible Docking Jupyter Notebook
-# Based on Python 3.10 for better cctbx-base compatibility
+# Based on Python 3.11 for better cctbx-base compatibility
 
 FROM python:3.11-slim
 
@@ -61,13 +61,18 @@ RUN cd /tmp && \
     chmod +x mapwater.py dry.py && \
     mv mapwater.py dry.py /opt/conda/envs/vina/bin/
 
+# Create non-root user 'docker'
+RUN useradd -m -s /bin/bash docker && \
+    usermod -aG video docker
+
 # Copy and setup startup script
 COPY start-jupyter.sh /usr/local/bin/start-jupyter.sh
 RUN chmod +x /usr/local/bin/start-jupyter.sh
 
-# Copy Jupyter configuration
-RUN mkdir -p /root/.jupyter
-COPY jupyter_server_config.py /root/.jupyter/jupyter_server_config.py
+# Copy Jupyter configuration for docker user
+RUN mkdir -p /home/docker/.jupyter
+COPY jupyter_server_config.py /home/docker/.jupyter/jupyter_server_config.py
+RUN chown -R docker:docker /home/docker/.jupyter
 
 # Copy the notebook to the workspace
 COPY Template_Flexible_Docking.ipynb /workspace/
@@ -75,8 +80,14 @@ COPY Template_Flexible_Docking.ipynb /workspace/
 # Create a directory for data and results
 RUN mkdir -p /workspace/data /workspace/results
 
-# Set up the conda environment to be activated by default
-RUN echo "source /opt/conda/etc/profile.d/conda.sh && conda activate vina" >> ~/.bashrc
+# Change ownership of /workspace to docker user
+RUN chown -R docker:docker /workspace
+
+# Set up the conda environment to be activated by default for docker user
+RUN echo "source /opt/conda/etc/profile.d/conda.sh && conda activate vina" >> /home/docker/.bashrc
+
+# Switch to non-root user
+USER docker
 
 # Expose port for Jupyter
 EXPOSE 8888

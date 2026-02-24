@@ -1,10 +1,10 @@
 # AutoDock Vina Docker Environment
 
-This Docker environment provides a complete setup for running AutoDock Vina flexible docking experiments using Jupyter Lab with Python 3.10.
+This Docker environment provides a complete setup for running AutoDock Vina flexible docking experiments using Jupyter Lab with Python 3.11.
 
 ## What's Included
 
-- **Python 3.10** (for optimal cctbx-base compatibility)
+- **Python 3.11** (for optimal cctbx-base compatibility)
 - **Jupyter Lab** with widgets support and bash terminals
 - **AutoDock Vina** and AutoGrid tools
 - **RDKit** for cheminformatics
@@ -125,23 +125,23 @@ docker-compose exec autodock-vina bash
 
 ```
 Autodock_vina/
-├── Dockerfile                              # Docker image definition
-├── docker-compose.yml                     # Docker Compose configuration
-├── environment.yml                        # Conda environment specification
-├── start-jupyter.sh                       # Jupyter startup script
+├── Dockerfile                            # Docker image definition
+├── docker-compose.yml                    # Docker Compose configuration
+├── environment.yml                       # Conda environment specification
+├── start-jupyter.sh                      # Jupyter startup script
 ├── jupyter_server_config.py              # Jupyter configuration
 ├── Vina_RTD_02_Flexible_Docking.ipynb    # Main notebook
 ├── Template_Flexible_Docking.ipynb       # Template notebook
-├── data/                                   # Input data directory
-├── results/                               # Output results directory
-└── README.md                              # This file
+├── data/                                 # Input data directory
+├── results/                              # Output results directory
+└── README.md                             # This file
 ```
 
 ## Environment Details
 
 ### Software Versions
 
-- **Base:** Python 3.10-slim
+- **Base:** Python 3.11-slim
 - **Package Manager:** Mamba (faster than conda)
 - **AutoDock Vina:** Latest from conda-forge
 - **RDKit:** Latest from conda-forge
@@ -158,7 +158,42 @@ Autodock_vina/
 
 - `./data` → `/workspace/data` (input files)
 - `./results` → `/workspace/results` (output files)
+- `./src` → `/workspace/src` (script files)
 - `.` → `/workspace/host` (access to all project files)
+
+## Non-Root User Setup
+
+The Docker container runs as a **non-root user** (`docker`) for improved security and proper file ownership handling.
+
+### How It Works
+
+- **Inside container:** The `docker` user (UID 1000) executes scripts and creates files
+- **On host system:** Output files appear to be owned by your host user (e.g., `ttyskg`)
+- **Why?** Both the container's `docker` user and your host user share the same UID (1000)
+
+This means:
+- ✅ **No more root-owned files** created by container processes
+- ✅ **Automatic ownership mapping** - files created by the container are readable/writable by your host user
+- ✅ **Better security** - container processes don't run as root
+
+### Verification
+
+Check file ownership with numeric UIDs to confirm non-root ownership:
+
+```bash
+# Shows UID:GID instead of user names
+ls -in results/2026-02-19_hHRH3/data/ligands/
+
+# Output: files owned by 1000:1000 (the docker user inside container)
+# Displayed as your username on host (same UID)
+```
+
+### Configuration Details
+
+**Modified files:**
+- `Dockerfile` - Creates `docker` user, changes `/workspace` ownership, adds `USER docker` directive
+- `docker-compose.yml` - Specifies `user: "docker"` for container execution
+- `start-jupyter.sh` - Removed `--allow-root` flag (not needed with non-root user)
 
 ## Using the Notebook
 
